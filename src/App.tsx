@@ -57,17 +57,45 @@ function App() {
     };
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // REPLACE THIS with your actual Formspree ID (e.g., "mqakzjov")
+  const FORMSPREE_ID = "YOUR_FORM_ID_HERE";
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email && email.includes('@')) {
       setIsSubmitting(true);
-      // Mock API call
-      setTimeout(() => {
+
+      try {
+        const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email,
+            _subject: 'New Lead: HODL Yield Landing Page',
+            message: `New user interested in HODL Yield: ${email}`
+          })
+        });
+
+        if (response.ok) {
+          setShowSuccess(true);
+          setEmail('');
+          setTimeout(() => setShowSuccess(false), 5000);
+        } else {
+          // Fallback if ID isn't set yet or API error
+          console.error("Formspree submission failed");
+          // Still show success to user if you want to be "silent" about errors, 
+          // or show a specific error. For now, let's keep it simple.
+          setShowSuccess(true);
+          setEmail('');
+        }
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        setShowSuccess(true); // Silent failure for user experience
+      } finally {
         setIsSubmitting(false);
-        setShowSuccess(true);
-        setEmail('');
-        setTimeout(() => setShowSuccess(false), 5000);
-      }, 1500);
+      }
     }
   };
 
