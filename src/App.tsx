@@ -58,7 +58,7 @@ function App() {
   }, []);
 
   // REPLACE THIS with your actual Formspree ID (e.g., "mqakzjov")
-  const FORMSPREE_ID = "YOUR_FORM_ID_HERE";
+  const FORMSPREE_ID = "mgonwlny";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
