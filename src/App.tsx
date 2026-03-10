@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './index.css';
+import Logo from './Logo';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -104,8 +105,8 @@ function App() {
       <nav className="navbar">
         <div className="container nav-content">
           <div className="logo">
-            <img src="/logo.png" alt="BTC Fellow Logo" className="logo-img" />
-            <span>BTC <span className="highlight">Fellow</span></span>
+            <Logo className="logo-svg" />
+            <span><span className="highlight">BTC</span> Fellow</span>
           </div>
           <ul className="nav-links">
             <li><a href="#hero">The Problem</a></li>

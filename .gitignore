@@ -22,3 +22,22 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Unused Images
+public/croppedImage.png
+public/logo_new_full.png
+public/vite.svg
+src/assets/react.svg
+public/al.jpg
+public/alpha.png
+public/favicon.png
+
+
+# Images
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.svg
+*.ico
+!public/logo.png

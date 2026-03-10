@@ -111,12 +111,12 @@ a {
   letter-spacing: -0.02em;
 }
 
-.logo-img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  border-radius: 6px;
-  /* box-shadow: 0 0 12px var(--accent-orange-glow); */
+.logo-svg {
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  /* Bow color - changed to white for visibility */
+  overflow: visible;
 }
 
 .nav-links {
@@ -180,7 +180,8 @@ a {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 80px;
+  padding: 120px 0;
+  /* Increased padding */
   /* Offset for navbar */
   overflow: hidden;
 }
@@ -222,18 +223,20 @@ a {
 }
 
 .hero-title {
-  font-size: 4.5rem;
-  line-height: 1.1;
+  font-size: 5.85rem;
+  /* ~30% increase from 4.5rem */
+  line-height: 1.05;
   font-weight: 800;
-  letter-spacing: -0.03em;
-  margin-bottom: 1.5rem;
+  letter-spacing: -0.04em;
+  margin-bottom: 2rem;
 }
 
 .hero-subtitle {
-  font-size: 1.25rem;
+  font-size: 1.6rem;
+  /* ~30% increase from 1.25rem */
   color: var(--text-secondary);
-  margin-bottom: 2.5rem;
-  line-height: 1.7;
+  margin-bottom: 3.5rem;
+  line-height: 1.6;
 }
 
 .hero-subtitle .highlight {
@@ -520,7 +523,8 @@ footer {
 /* Responsive Design */
 @media (max-width: 992px) {
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
+    /* Scaled for tablet */
   }
 
   .cards-grid {
@@ -534,7 +538,8 @@ footer {
   }
 
   .hero-title {
-    font-size: 2.8rem;
+    font-size: 3.2rem;
+    /* Scaled for mobile */
   }
 
   .cards-grid {
