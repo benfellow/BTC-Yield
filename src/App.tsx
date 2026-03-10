@@ -73,8 +73,8 @@ function App() {
           },
           body: JSON.stringify({
             email: email,
-            _subject: 'New Lead: HODL Yield Landing Page',
-            message: `New user interested in HODL Yield: ${email}`
+            _subject: 'New Lead: BTC Fellow Landing Page',
+            message: `New user interested in BTC Fellow: ${email}`
           })
         });
 
@@ -104,8 +104,8 @@ function App() {
       <nav className="navbar">
         <div className="container nav-content">
           <div className="logo">
-            <div className="logo-icon"></div>
-            <span>HODL<span className="highlight">Yield</span></span>
+            <img src="/logo.png" alt="BTC Fellow Logo" className="logo-img" />
+            <span>BTC <span className="highlight">Fellow</span></span>
           </div>
           <ul className="nav-links">
             <li><a href="#hero">The Problem</a></li>
