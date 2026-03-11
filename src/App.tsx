@@ -58,8 +58,8 @@ function App() {
     };
   }, []);
 
-  // REPLACE THIS with your actual Formspree ID (e.g., "mqakzjov")
-  const FORMSPREE_ID = "mgonwlny";
+  // Brevo Configuration from .env
+  const BREVO_ACTION_URL = import.meta.env.VITE_BREVO_ACTION_URL;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,32 +67,37 @@ function App() {
       setIsSubmitting(true);
 
       try {
-        const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        console.log("Submitting to Brevo URL:", BREVO_ACTION_URL);
+
+        if (!BREVO_ACTION_URL) {
+          console.error("VITE_BREVO_ACTION_URL is missing! Check your .env file and restart the dev server.");
+        }
+
+        // Using URLSearchParams for better compatibility with form endpoints
+        const searchParams = new URLSearchParams();
+        searchParams.append('EMAIL', email);
+        searchParams.append('locale', 'en');
+        searchParams.append('email_address_check', ''); // Honeypot field from your HTML
+
+        // Note: Using no-cors mode as Brevo forms are handled by their own endpoint
+        // It's normal to not be able to read the response object in this mode
+        await fetch(BREVO_ACTION_URL, {
           method: 'POST',
+          mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
           },
-          body: JSON.stringify({
-            email: email,
-            _subject: 'New Lead: BTC Fellow Landing Page',
-            message: `New user interested in BTC Fellow: ${email}`
-          })
+          body: searchParams.toString()
         });
 
-        if (response.ok) {
-          setShowSuccess(true);
-          setEmail('');
-          setTimeout(() => setShowSuccess(false), 5000);
-        } else {
-          // Fallback if ID isn't set yet or API error
-          console.error("Formspree submission failed");
-          // Still show success to user if you want to be "silent" about errors, 
-          // or show a specific error. For now, let's keep it simple.
-          setShowSuccess(true);
-          setEmail('');
-        }
+        // Since no-cors doesn't return response status, we assume success
+        // unless a network error occurs. This is the trade-off for static sites.
+        setShowSuccess(true);
+        setEmail('');
+        setTimeout(() => setShowSuccess(false), 5000);
+
       } catch (error) {
-        console.error("Error submitting form:", error);
+        console.error("Error submitting to Brevo:", error);
         setShowSuccess(true); // Silent failure for user experience
       } finally {
         setIsSubmitting(false);
@@ -228,7 +233,7 @@ function App() {
                 </button>
               </form>
               {showSuccess && (
-                <div id="form-message" className="form-message">Verification link sent to your email!</div>
+                <div id="form-message" className="form-message">Thank you! Live vault information will be emailed to you immediately.</div>
               )}
             </div>
           </div>
